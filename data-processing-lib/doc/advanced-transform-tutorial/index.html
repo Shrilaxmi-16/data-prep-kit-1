@@ -1,0 +1,970 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../simplest-transform-tutorial/">
+      
+      
+        <link rel="next" href="../../../kfp/doc/simple_transform_pipeline/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
+    
+    
+      
+        <title>Advanced - Data Prep Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/badge.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#advanced-transform-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Data Prep Kit" class="md-header__button md-logo" aria-label="Data Prep Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data Prep Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IBM/data-prep-kit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../overview/" class="md-tabs__link">
+        
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../transform-tutorials.md" class="md-tabs__link">
+          
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Data Prep Kit" class="md-nav__button md-logo" aria-label="Data Prep Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Data Prep Kit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IBM/data-prep-kit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../transform-tutorials.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../simplest-transform-tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Advanced
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Advanced
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hashfilter" class="md-nav__link">
+    <span class="md-ellipsis">
+      HashFilter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededuptransform" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupTransform
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededupruntime" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupRuntime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededuptabletransformconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupTableTransformConfiguration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../kfp/doc/simple_transform_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KFP Pipeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#hashfilter" class="md-nav__link">
+    <span class="md-ellipsis">
+      HashFilter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededuptransform" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupTransform
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededupruntime" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupRuntime
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ededuptabletransformconfiguration" class="md-nav__link">
+    <span class="md-ellipsis">
+      EdedupTableTransformConfiguration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main" class="md-nav__link">
+    <span class="md-ellipsis">
+      main()
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="advanced-transform-tutorial">Advanced Transform Tutorial</h1>
+<p>In this example, we implement an <a href="https://github.com/IBM/data-prep-kit/tree/dev/transforms/universal/ededup">ededup</a> transform that
+removes duplicate documents across all files. In this tutorial, we will show the following:</p>
+<ul>
+<li>How to write the <code>ededup</code> transform to generate the output table.</li>
+<li>How to define transform-specific metadata that can be associated
+  with each table transformation and aggregated across all transformations
+  in a single run of the transform.</li>
+<li>How to implement custom <code>TransformRuntime</code> to create supporting Ray objects and supplement
+  transform-specific metadata with the information about this statistics</li>
+<li>How to define command line arguments that can be used to configure
+  the operation of our <em>noop</em> transform.</li>
+</ul>
+<p>The complete task involves the following:</p>
+<ul>
+<li>EdedupTransform - class that implements the specific transformation</li>
+<li>EdedupRuntime - class that implements custom TransformRuntime to create supporting Ray objects and enhance job output
+  statistics</li>
+<li>EdedupTableTransformConfiguration - class that provides configuration for the
+  EdedupTransform and EdedupRuntime, including transform runtime class and the command line arguments used to
+  configure them.</li>
+<li>main() - simple creation and use of the TransformLauncher.</li>
+</ul>
+<p>(Currently, the complete code for the noop transform used for this
+tutorial can be found in the
+<a href="https://github.com/IBM/data-prep-kit/tree/dev/transforms/universal/ededup">ededup transform</a> directory.</p>
+<p>Finally, we show to use the command line to run the transform in a local ray cluster</p>
+<h2 id="hashfilter">HashFilter</h2>
+<p>One of the basic components of exact dedup implementation is a cache of hashes. That is why we will start
+from implementing this support actor. The implementation is fairly straight forward and can be
+found <a href="https://github.com/IBM/data-prep-kit/blob/dev/transforms/universal/ededup/ray/src/ededup_transform_ray.py">here</a></p>
+<h2 id="ededuptransform">EdedupTransform</h2>
+<p>First, let's define the transform class.  To do this we extend
+the base abstract/interface class
+<a href="https://github.com/IBM/data-prep-kit/blob/dev/data-processing-lib/python/src/data_processing/transform/table_transform.py">AbstractTableTransform</a>,
+which requires definition of the following:</p>
+<ul>
+<li>an initializer (i.e. <code>init()</code>) that accepts a dictionary of configuration
+  data.  For this example, the configuration data will only be defined by
+  command line arguments (defined below).</li>
+<li>the <code>transform()</code> method itself that takes an input table and produces an output
+  table and any associated metadata for that table transformation.</li>
+</ul>
+<p>Other methods such as <code>flush()</code> need not be overridden/redefined for this example.</p>
+<p>We start with the simple definition of the class, its initializer and the imports required
+by subsequent code:</p>
+<pre><code class="language-python">from argparse import ArgumentParser, Namespace
+from typing import Any
+
+import pyarrow as pa
+import ray
+from data_processing_ray.data_access import DataAccessFactoryBase
+from data_processing_ray.runtime.ray import (
+  DefaultRayTransformRuntime,
+  RayTransformLauncher,
+  RayUtils,
+)
+from data_processing_ray.runtime.ray.runtime_configuration import (
+  RayTransformRuntimeConfiguration,
+)
+from data_processing.transform import AbstractTableTransform, TransformConfiguration
+from data_processing.utils import GB, CLIArgumentProvider, TransformUtils, get_logger
+from ray.actor import ActorHandle
+
+
+class EdedupTransform(AbstractTableTransform):
+
+  def __init__(self, config: dict):
+    super().__init__(config)
+    self.doc_column = config.get(&quot;doc_column&quot;, &quot;&quot;)
+    self.hashes = config.get(&quot;hashes&quot;, [])
+</code></pre>
+<p>The <code>EdedupTransform</code> class extends the <code>AbstractTableTransform</code>, which defines the required methods.</p>
+<p>For purposes of the tutorial and to simulate a more complex processing
+job, our initializer allows our transform to be configurable
+with document column name and a list of hash actors during the call to <code>transform()</code>.
+Configuration is provided by the framework in a dictionary provided to the initializer.
+Below we will cover how <code>doc_column</code> and <code>hashes</code> arguments are made available to the initializer.</p>
+<p>Next we define the <code>transform()</code> method itself, which includes the addition of some
+metadata.</p>
+<pre><code class="language-python">    def transform(self, table: pa.Table) -&gt; tuple[list[pa.Table], dict[str, Any]]:
+
+
+  if not TransformUtils.validate_columns(table=table, required=[self.doc_column]):
+    return [], {}
+# Inner variables
+hashes = set()
+unique = []
+hd = {}
+# Compute unique hashes for the table
+for text in table[self.doc_column]:
+  # Compute doc hash
+  h = TransformUtils.str_to_hash(TransformUtils.normalize_string(str(text)))
+  if h not in hashes:  # Processing this hash for the first time
+    hashes.add(h)  # Remember it locally
+    hd[h] = str(text)
+    if len(hd) &gt;= REQUEST_LEN:  # time to check remotely
+      unique = unique + self._process_cached_hashes(hd=hd)
+      hd = {}
+if len(hd) &gt; 0:  # Process remaining hashes
+  unique = unique + self._process_cached_hashes(hd=hd)
+
+# Remove duplicates
+unique_set = set(unique)
+mask = [False] * table.num_rows
+index = 0
+for text in table[self.doc_column]:
+  str_text = str(text)
+  if str_text in unique_set:
+    mask[index] = True
+    unique_set.remove(str_text)
+  index += 1
+# Create output table
+out_table = table.filter(mask)
+# report statistics
+stats = {&quot;source_documents&quot;: table.num_rows, &quot;result_documents&quot;: out_table.num_rows}
+return [out_table], stats
+</code></pre>
+<p>The single input to this method is the in-memory pyarrow table to be transformed.
+The return of this function is a list of tables and optional metadata.  In this
+case of simple 1:1 table conversion the list will contain a single table, result of removing
+duplicates from input table.</p>
+<p>The metadata is a free-form dictionary of keys with numeric values that will be aggregated
+by the framework and reported as aggregated job statistics metadata.
+If there is no metadata then simply return an empty dictionary.</p>
+<h2 id="ededupruntime">EdedupRuntime</h2>
+<p>First, let's define the transform runtime class.  To do this we extend
+the base abstract/interface class
+<a href="https://github.com/IBM/data-prep-kit/blob/dev/data-processing-lib/ray/src/data_processing_ray/runtime/ray/transform_runtime.py">DefaultTableTransformRuntime</a>,
+which requires definition of the following:</p>
+<ul>
+<li>an initializer (i.e. <code>init()</code>) that accepts a dictionary of configuration
+  data.  For this example, the configuration data will only be defined by
+  command line arguments (defined below).</li>
+<li>the <code>get_transform_config()</code> method that takes <code>data_access_factory</code>, <code>statistics actor</code>, and
+  <code>list of files to process</code> and produces a dictionary of parameters used by transform.</li>
+<li>the <code>compute_execution_stats()</code> method that takes take a dictionary of metadata, enhances it and
+  produces an enhanced metadata dictionary.</li>
+</ul>
+<p>We start with the simple definition of the class and its initializer</p>
+<pre><code class="language-python">class EdedupRuntime(DefaultTableTransformRuntime):
+
+    def __init__(self, params: dict[str, Any]):
+        super().__init__(params)
+        self.filters = []
+</code></pre>
+<p>Next we define the <code>get_transform_config()</code> method, which, in this case, creates supporting Ray Actors and
+adds their handles to the transform parameters</p>
+<pre><code class="language-python">    def get_transform_config(
+        self, data_access_factory: DataAccessFactory, statistics: ActorHandle, files: list[str]
+) -&gt; dict[str, Any]:
+
+
+self.aggregators = RayUtils.create_actors(
+  clazz=HashFilter,
+  params={},
+  actor_options={&quot;num_cpus&quot;: self.params.get(&quot;hash_cpu&quot;, 0.5)},
+  n_actors=self.params.get(&quot;num_hashes&quot;, 1),
+)
+return {&quot;hashes&quot;: self.aggregators} | self.params
+</code></pre>
+<p>Inputs to this method includes a set of parameters, that moght not be needed for this transformer, but
+rather a superset of all parameters that can be used by different implementations of transform runtime (
+see for example <a href="https://github.com/IBM/data-prep-kit/tree/dev/transforms/universal/fdedup">fuzzy dedup</a>, etc).
+The return of this function is a dictionary information for transformer initialization. In this
+implementation we add additional parameters to the input dictionary, but in general, it can be a completely
+new dictionary build here</p>
+<p>Finally we define the <code>compute_execution_stats()</code> method, which which enhances metadata collected by statistics
+class</p>
+<pre><code class="language-python">    def compute_execution_stats(self, stats: dict[str, Any]) -&gt; dict[str, Any]:
+
+
+# Get filters stats
+sum_hash = 0
+sum_hash_mem = 0
+remote_replies = [f.get_size.remote() for f in self.aggregators]
+while remote_replies:
+  # Wait for replies
+  ready, not_ready = ray.wait(remote_replies)
+  for r in ready:
+    h_size, h_memory = ray.get(r)
+    sum_hash = sum_hash + h_size
+    sum_hash_mem = sum_hash_mem + h_memory
+  remote_replies = not_ready
+dedup_prst = 100 * (1.0 - stats.get(&quot;result_documents&quot;, 1) / stats.get(&quot;source_documents&quot;, 1))
+return {&quot;number of hashes&quot;: sum_hash, &quot;hash memory, GB&quot;: sum_hash_mem, &quot;de duplication %&quot;: dedup_prst} | stats
+</code></pre>
+<p>Input to this method is a dictionary of metadata collected by statistics object. It then enhances it by information
+collected by hash actors and custom computations based on statistics data.</p>
+<h2 id="ededuptabletransformconfiguration">EdedupTableTransformConfiguration</h2>
+<p>The final class we need to implement is <code>EdedupRayTransformConfiguration</code> class that provides configuration for 
+running our transform. Although we provide only Ray-based implementation, Ray-based configuration relies on Python-based
+configuration that we need to define first. So we first need to define <code>EdedupTableTransformConfiguration</code> class, 
+defining the following:</p>
+<ul>
+<li>The short name for the transform</li>
+<li>The class implementing the transform - in our case EdedupTransform</li>
+<li>The transform runtime class be used - in our case EdedupRuntime</li>
+<li>Command line argument support.</li>
+</ul>
+<p>First we define the class and its initializer,</p>
+<pre><code class="language-python">short_name = &quot;ededup&quot;
+cli_prefix = f&quot;{short_name}_&quot;
+
+class EdedupTableTransformConfiguration(TransformConfiguration):
+  def __init__(self):
+    super().__init__(
+      name=short_name,
+      transform_class=EdedupTransform,
+    )
+</code></pre>
+<p>The initializer extends the DefaultTableTransformConfiguration which provides simple
+capture of our configuration data and enables picklability through the network.
+It also adds a <code>params</code> field that will be used below to hold the transform's
+configuration data (used in <code>EdedupRuntime.init()</code> above).</p>
+<p>Next, we provide two methods that define and capture the command line configuration that
+is specific to the <code>EdedupTransform</code>, in this case the number of seconds to sleep during transformation.
+First we define the method establishes the command line arguments.
+This method is given a global argument parser to which the <code>EdedupTransform</code> arguments are added.
+It is good practice to include a common prefix to all transform-specific options (i.e. pii, lang, etc).
+In our case we will use <code>noop_</code>.</p>
+<pre><code class="language-python">    def add_input_params(self, parser: ArgumentParser) -&gt; None:
+      parser.add_argument(f&quot;--{cli_prefix}hash_cpu&quot;, type=float, default=0.5, help=&quot;number of CPUs per hash&quot;)
+      parser.add_argument(f&quot;--{cli_prefix}num_hashes&quot;, type=int, default=0, help=&quot;number of hash actors to use&quot;)
+      parser.add_argument(f&quot;--{cli_prefix}doc_column&quot;, type=str, default=&quot;contents&quot;, help=&quot;key for accessing data&quot;)
+</code></pre>
+<p>Next we implement a method that is called after the framework has parsed the CLI args
+and which allows us to capture the <code>EdedupTransform</code>-specific arguments and optionally validate them.</p>
+<pre><code class="language-python">    def apply_input_params(self, args: Namespace) -&gt; bool:
+      captured = CLIArgumentProvider.capture_parameters(args, cli_prefix, False)
+      self.params = self.params | captured
+      if self.params[&quot;num_hashes&quot;] &lt;= 0:
+        logger.info(f&quot;Number of hashes should be greater then zero, provided {args.num_hashes}&quot;)
+        return False
+      logger.info(f&quot;exact dedup params are {self.params}&quot;)
+      return True
+</code></pre>
+<p>Now we can implement <code>EdedupRayTransformConfiguration</code>with the following code</p>
+<pre><code class="language-python">class EdedupRayTransformConfiguration(RayTransformConfiguration):
+    def __init__(self):
+        super().__init__(transform_config=EdedupTableTransformConfiguration(), runtime_class=EdedupRuntime)
+
+</code></pre>
+<h2 id="main">main()</h2>
+<p>Next, we show how to launch the framework with the <code>EdedupTransform</code> using the
+framework's <code>TransformLauncher</code> class.</p>
+<pre><code class="language-python">if __name__ == &quot;__main__&quot;:
+  launcher = RayTransformLauncher(EdedupRayTransformConfiguration())
+  launcher.launch()
+</code></pre>
+<p>The launcher requires only an instance of DefaultTableTransformConfiguration
+(our <code>EdedupRayTransformConfiguration</code> class).
+A single method <code>launch()</code> is then invoked to run the transform in a Ray cluster.</p>
+<h2 id="running">Running</h2>
+<blockquote>
+<p><strong>Note:</strong> You will need to run the setup commands in the <a href="../../ray/"><code>README</code></a> before running the following examples.</p>
+</blockquote>
+<p>Assuming the above <code>main()</code> is placed in <code>ededup_transform.py</code> we can run the transform on local data 
+as follows:</p>
+<pre><code class="language-shell">make run-cli-sample
+</code></pre>
+<p>See the <a href="../ray-launcher-options/">launcher options</a> for a complete list of
+transform-independent command line options.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.af256bd8.min.js"></script>
+      
+        <script src="../../../assets/javascripts/badge.js" async></script>
+      
+    
+  </body>
+</html>

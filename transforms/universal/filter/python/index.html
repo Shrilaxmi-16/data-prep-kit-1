@@ -1,0 +1,954 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
+    
+    
+      
+        <title>Filtering Transform for Python Runtime - Data Prep Kit</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/badge.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#filtering-transform-for-python-runtime" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Data Prep Kit" class="md-header__button md-logo" aria-label="Data Prep Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Data Prep Kit
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Filtering Transform for Python Runtime
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/IBM/data-prep-kit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../../data-processing-lib/doc/overview/" class="md-tabs__link">
+        
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../data-processing-lib/doc/transform-tutorials.md" class="md-tabs__link">
+          
+  
+  Tutorials
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Data Prep Kit" class="md-nav__button md-logo" aria-label="Data Prep Kit" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Data Prep Kit
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/IBM/data-prep-kit" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../data-processing-lib/doc/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorials
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../data-processing-lib/doc/transform-tutorials.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    None
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../data-processing-lib/doc/simplest-transform-tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Simple
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../data-processing-lib/doc/advanced-transform-tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Advanced
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../kfp/doc/simple_transform_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    KFP Pipeline
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-and-command-line-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration and command line Options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-two-numerical-filtering-criteria-joined-by-and" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1 - two numerical filtering criteria joined by AND
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-two-numerical-filtering-criteria-joined-by-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2 - two numerical filtering criteria joined by OR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3-two-filtering-criteria-based-on-non-numerical-datetime-and-string-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 3 - two filtering criteria based on non-numerical (datetime and string) types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-as-ray-based-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running as ray-based application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-as-pure-python-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running as pure python application
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passing-parameters-through-command-line-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passing parameters through command-line-interface
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-statistics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter Statistics
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#running_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Running">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#launched-command-line-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Launched Command Line Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-samples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Running the samples
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transforming-data-using-the-transform-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transforming data using the transform image
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="filtering-transform-for-python-runtime">Filtering Transform for Python Runtime</h1>
+<p>Please see the set of
+<a href="../../../">transform project conventions</a>
+for details on general project conventions, transform configuration,
+testing and IDE set up.</p>
+<h2 id="summary">Summary</h2>
+<p>Filtering cleans up data by:
+ * Removing the rows that do not meet a specific set of criteria.
+ * Dropping the columns that are no longer needed (e.g. annotation columns, used for filtering rows).</p>
+<h2 id="configuration-and-command-line-options">Configuration and command line Options</h2>
+<p>The set of dictionary keys holding <a href="https://github.com/IBM/data-prep-kit/blob/dev/transforms/universal/filter/python/src/filter_transform_python.py">FilterTransform</a> 
+configuration for values are as follows:</p>
+<ul>
+<li><em>filter_criteria_list</em> - specifies the list of row filter criteria (in SQL WHERE clause format). Each filter criterion is a string. The default value of this parameter is <code>[]</code> (an empty list, meaning that all the rows in the input table will be kept). </li>
+<li><em>filter_logical_operator</em> - specifies the logical operator that joins filter criteria (<code>AND</code> or <code>OR</code>). The default value of this parameter is <code>AND</code>.</li>
+<li><em>filter_columns_to_drop</em> - the list with the names of the columns to drop after row filtering is complete. The default value of this parameter is <code>[]</code> (an empty list, meaning that all the columns in the input table will be kept)</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>Consider a table with eight text documents, where each row has additional info about that document (date acquired, source URL, etc.), and a set of quality signals for that document.  </p>
+<pre><code>|----------|----------|----------|----------|----------|----------|---------|----------|----------|----------|---------|
+│ document | title    | contents | date_acq | extra    | cluster  | ft_lang | ft_score | docq_tot | docq_mea | docq_pe │
+│ ---      | ---      | ---      | uired    | ---      | ---      | ---     | ---      | al_words | n_word_l | rplex_s │
+│ str      | str      | str      | ---      | struct[5 | i64      | str     | f64      | ---      | en       | core    │
+│          |          |          | datetime | ]        |          |         |          | i64      | ---      | ---     │
+│          |          |          | [ns]     |          |          |         |          |          | f64      | f64     │
+|----------|----------|----------|----------|----------|----------|---------|----------|----------|----------|---------|
+│ CC-MAIN- | https:// | BACKGROU | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 77       | 5.662338 | 226.5   │
+│ 20190221 | www.sema | ND       | 05       | ation/ht |          |         |          |          |          |         │
+│ 132217-2 | nticscho | The      | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01902211 | lar.org/ | Rhinitis |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | Control  |          | …        |          |         |          |          |          |         │
+│          |          | …        |          |          |          |         |          |          |          |         │
+│ CC-MAIN- | https:// | Travel + | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 321      | 5.05919  | 245.0   │
+│ 20200528 | www.torn | Leisure: | 27       | ation/ht |          |         |          |          |          |         │
+│ 232803-2 | osnews.g | The 5    | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 02005290 | r/en/tou | best     |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | res…     |          | …        |          |         |          |          |          |         │
+│ CC-MAIN- | https:// | Stourbri | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 646      | 5.27709  | 230.3   │
+│ 20190617 | www.stou | dge      | 04       | ation/ht |          |         |          |          |          |         │
+│ 103006-2 | rbridgen | College  | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01906171 | ews.co.u | to close |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | BMe…     |          | …        |          |         |          |          |          |         │
+│ CC-MAIN- | https:// | Our      | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 242      | 5.557851 | 407.2   │
+│ 20180318 | www.univ | Guidance | 19       | ation/ht |          |         |          |          |          |         │
+│ 184945-2 | ariety.c | Philosop | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01803182 | om/app/s | hy       |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | High     |          | …        |          |         |          |          |          |         │
+│          |          | sch…     |          |          |          |         |          |          |          |         │
+│ CC-MAIN- | http://h | Hukun    | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 169      | 4.840237 | 240.5   │
+│ 20180120 | urur.com | Hurur    | 18       | ation/ht |          |         |          |          |          |         │
+│ 083038-2 | /hukun-h | running  | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01801201 | urur-run | for Ward |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | 1 c…     |          | …        |          |         |          |          |          |         │
+│ CC-MAIN- | https:// | Life's   | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 61       | 4.786885 | 244.0   │
+│ 20180522 | www.chap | Reverie  | 18       | ation/ht |          |         |          |          |          |         │
+│ 131652-2 | ters.ind | Kobo     | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01805221 | igo.ca/e | ebook |  |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | Sept…    |          | …        |          |         |          |          |          |         │
+│ CC-MAIN- | http://w | Kamis,   | 2023-07- | {&quot;applic | 18008253 | en      | 1.0      | 509      | 4.738703 | 224.6   │
+│ 20181120 | ww.onedo | 10 Maret | 05       | ation/ht | 113      |         |          |          |          |         │
+│ 130743-2 | llarfoll | 2016     | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01811201 | owers.co | Buy      |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | Twitter… |          | …        |          |         |          |          |          |         │
+│ CC-MAIN- | http://w | Rory     | 2023-07- | {&quot;applic | -1       | en      | 1.0      | 223      | 4.829596 | 167.5   │
+│ 20171213 | ww.iron- | Fallon   | 09       | ation/ht |          |         |          |          |          |         │
+│ 104259-2 | bru.co.u | joins    | 05:00:00 | tp; msgt |          |         |          |          |          |         │
+│ 01712131 | k/rory-f | Bristol  |          | ype=resp |          |         |          |          |          |         │
+│ …        | …        | Rovers…  |          | …        |          |         |          |          |          |         │
+|----------|----------|----------|----------|----------|----------|---------|----------|----------|----------|---------|
+</code></pre>
+<h4 id="example-1-two-numerical-filtering-criteria-joined-by-and">Example 1 - two numerical filtering criteria joined by AND</h4>
+<p>To filter this table and only keep the documents that have between 100 and 500 words <strong>and</strong> a perplexity score less than 230, and furthermore, drop the <code>extra</code> and <code>cluster</code> columns, invoke filtering with the following parameters:</p>
+<pre><code>filter_criteria_list = [&quot;docq_total_words &gt; 100 AND docq_total_words &lt; 500&quot;, &quot;docq_perplex_score &lt; 230&quot;]
+filter_logical_operator = &quot;AND&quot;
+filter_columns_to_drop = [&quot;extra&quot;, &quot;cluster&quot;]
+</code></pre>
+<p>This filter operation applied on the table above will return the following result:</p>
+<pre><code>|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+│ document    | title       | contents    | date_acquir | ft_lang | ft_score | docq_total_ | docq_mean_w | docq_perple │
+│ ---         | ---         | ---         | ed          | ---     | ---      | words       | ord_len     | x_score     │
+│ str         | str         | str         | ---         | str     | f64      | ---         | ---         | ---         │
+│             |             |             | datetime[ns |         |          | i64         | f64         | f64         │
+│             |             |             | ]           |         |          |             |             |             │
+|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+│ CC-MAIN-201 | http://www. | Rory Fallon | 2023-07-09  | en      | 1.0      | 223         | 4.829596    | 167.5       │
+│ 71213104259 | iron-bru.co | joins       | 05:00:00    |         |          |             |             |             │
+│ -201712131… | .uk/rory-f… | Bristol     |             |         |          |             |             |             │
+│             |             | Rovers…     |             |         |          |             |             |             │
+|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+
+</code></pre>
+<h4 id="example-2-two-numerical-filtering-criteria-joined-by-or">Example 2 - two numerical filtering criteria joined by OR</h4>
+<p>To filter this table and only keep the documents that have between 100 and 500 words <strong>or</strong> a perplexity score less than 230, and furthermore, drop the <code>extra</code> and <code>cluster</code> columns, invoke filtering with the following parameters:</p>
+<pre><code>filter_criteria_list = [&quot;docq_total_words &gt; 100 AND docq_total_words &lt; 500&quot;, &quot;docq_perplex_score &lt; 230&quot;]
+filter_logical_operator = &quot;OR&quot;
+filter_columns_to_drop = [&quot;extra&quot;, &quot;cluster&quot;]
+</code></pre>
+<p>This filter operation applied on the table above will return the following result:</p>
+<pre><code>|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+│ document    | title       | contents    | date_acquir | ft_lang | ft_score | docq_total_ | docq_mean_w | docq_perple |
+│ ---         | ---         | ---         | ed          | ---     | ---      | words       | ord_len     | x_score     │
+│ str         | str         | str         | ---         | str     | f64      | ---         | ---         | ---         │
+│             |             |             | datetime[ns |         |          | i64         | f64         | f64         │
+│             |             |             | ]           |         |          |             |             |             │
+|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+│ CC-MAIN-201 | https://www | BACKGROUND  | 2023-07-05  | en      | 1.0      | 77          | 5.662338    | 226.5       │
+│ 90221132217 | .semanticsc | The         | 05:00:00    |         |          |             |             |             │
+│ -201902211… | holar.org/… | Rhinitis    |             |         |          |             |             |             │
+│             |             | Control …   |             |         |          |             |             |             │
+│ CC-MAIN-201 | http://www. | Kamis, 10   | 2023-07-05  | en      | 1.0      | 509         | 4.738703    | 224.6       │
+│ 81120130743 | onedollarfo | Maret 2016  | 05:00:00    |         |          |             |             |             │
+│ -201811201… | llowers.co… | Buy         |             |         |          |             |             |             │
+│             |             | Twitter…    |             |         |          |             |             |             │
+│ CC-MAIN-201 | http://www. | Rory Fallon | 2023-07-09  | en      | 1.0      | 223         | 4.829596    | 167.5       │
+│ 71213104259 | iron-bru.co | joins       | 05:00:00    |         |          |             |             |             │
+│ -201712131… | .uk/rory-f… | Bristol     |             |         |          |             |             |             │
+│             |             | Rovers…     |             |         |          |             |             |             │
+│ CC-MAIN-202 | https://www | Travel +    | 2023-07-27  | en      | 1.0      | 321         | 5.05919     | 245.0       │
+│ 00528232803 | .tornosnews | Leisure:    | 05:00:00    |         |          |             |             |             │
+│ -202005290… | .gr/en/tou… | The 5 best  |             |         |          |             |             |             │
+│             |             | res…        |             |         |          |             |             |             │
+│ CC-MAIN-201 | https://www | Our         | 2023-07-19  | en      | 1.0      | 242         | 5.557851    | 407.2       │
+│ 80318184945 | .univariety | Guidance    | 05:00:00    |         |          |             |             |             │
+│ -201803182… | .com/app/s… | Philosophy  |             |         |          |             |             |             │
+│             |             | High sch…   |             |         |          |             |             |             │
+│ CC-MAIN-201 | http://huru | Hukun Hurur | 2023-07-18  | en      | 1.0      | 169         | 4.840237    | 240.5       │
+│ 80120083038 | r.com/hukun | running for | 05:00:00    |         |          |             |             |             │
+│ -201801201… | -hurur-run… | Ward 1 c…   |             |         |          |             |             |             │
+|-------------|-------------|-------------|-------------|---------|----------|-------------|-------------|-------------|
+</code></pre>
+<h4 id="example-3-two-filtering-criteria-based-on-non-numerical-datetime-and-string-types">Example 3 - two filtering criteria based on non-numerical (datetime and string) types</h4>
+<p>To filter this table and only keep the documents that were acquired between 2023-07-04 and 2023-07-08 and were downloaded using the <code>HTTPS</code> protocol, without dropping any columns, invoke filtering with the following parameters:</p>
+<pre><code>filter_criteria_list = [&quot;date_acquired BETWEEN '2023-07-04' AND '2023-07-08'&quot;, &quot;title LIKE 'https://%'&quot;]
+filter_logical_operator = &quot;AND&quot;
+filter_columns_to_drop = []
+</code></pre>
+<p>This filter operation applied on the table above will return the following result:</p>
+<pre><code>|----------|----------|----------|----------|----------|----------|---------|----------|----------|----------|---------|
+│ document | title    | contents | date_acq | extra    | cluster  | ft_lang | ft_score | docq_tot | docq_mea | docq_pe │
+│ ---      | ---      | ---      | uired    | ---      | ---      | ---     | ---      | al_words | n_word_l | rplex_s │
+│ str      | str      | str      | ---      | struct[5 | i64      | str     | f64      | ---      | en       | core    │
+│          |          |          | datetime | ]        |          |         |          | i64      | ---      | ---     │
+│          |          |          | [ns]     |          |          |         |          |          | f64      | f64     │
+|----------|----------|----------|----------|----------|----------|---------|----------|----------|----------|---------|
+│ CC-MAIN- | https:// | BACKGROU | 2023-07- | {&quot;applic | -1      | en      | 1.0      | 77       | 5.662338 | 226.5    │
+│ 20190221 | www.sema | ND       | 05       | ation/ht |         |         |          |          |          |          │
+│ 132217-2 | nticscho | The      | 05:00:00 | tp; msgt |         |         |          |          |          |          │
+│ 01902211 | lar.org/ | Rhinitis |          | ype=resp |         |         |          |          |          |          │
+│ …        | …        | Control  |          | …        |         |         |          |          |          |          │
+│          |          | …        |          |          |         |         |          |          |          |          │
+│ CC-MAIN- | https:// | Stourbri | 2023-07- | {&quot;applic | -1      | en      | 1.0      | 646      | 5.27709  | 230.3    │
+│ 20190617 | www.stou | dge      | 04       | ation/ht |         |         |          |          |          |          │
+│ 103006-2 | rbridgen | College  | 05:00:00 | tp; msgt |         |         |          |          |          |          │
+│ 01906171 | ews.co.u | to close |          | ype=resp |         |         |          |          |          |          │
+│ …        | …        | BMe…     |          | …        |         |         |          |          |          |          │
+|----------|----------|----------|----------|----------|---------|---------|----------|----------|----------|----------|
+</code></pre>
+<h2 id="running">Running</h2>
+<p>You can run the <a href="https://github.com/IBM/data-prep-kit/blob/dev/transforms/universal/filter/python/src/filter_local.py">filter_local.py</a> (python-only implementation) or <a href="src/filter_local_ray.py">filter_local_ray.py</a> (ray-based  implementation) to transform the <code>test1.parquet</code> file in <a href="https://github.com/IBM/data-prep-kit/tree/dev/transforms/universal/filter/python/test-data/input">test input data</a> to an <code>output</code> directory.  The directory will contain both the new annotated <code>test1.parquet</code> file and the <code>metadata.json</code> file.</p>
+<h4 id="running-as-ray-based-application">Running as ray-based application</h4>
+<pre><code>(venv) cma:src$ python filter_local_ray.py
+12:48:01 INFO - Running locally
+12:48:01 INFO - Using local configuration with: input_folder - /home/cma/de/data-prep-kit/transforms/universal/filtering/test-data/input output_folder - /home/cma/de/data-prep-kit/transforms/universal/filtering/output
+12:48:01 INFO - Not using data sets, checkpointing False, max files -1
+12:48:01 INFO - number of workers 5 worker options {'num_cpus': 0.8}
+12:48:01 INFO - pipeline id pipeline_id; number workers 5
+12:48:01 INFO - job details {'job category': 'preprocessing', 'job name': 'filter', 'job type': 'ray', 'job id': 'job_id'}
+12:48:01 INFO - code location {'github': 'github', 'commit_hash': '12345', 'path': 'path'}
+12:48:01 INFO - actor creation delay 0
+2024-03-31 12:48:03,390 INFO worker.py:1715 -- Started a local Ray instance. View the dashboard at 127.0.0.1:8265 
+(orchestrate pid=308034) 12:48:04 INFO - orchestrator started at 2024-03-31 12:48:04
+(orchestrate pid=308034) 12:48:04 INFO - Number of files is 1, source profile {'max_file_size': 0.15915775299072266, 'min_file_size': 0.15915775299072266, 'total_file_size': 0.15915775299072266}
+(orchestrate pid=308034) 12:48:04 INFO - Cluster resources: {'cpus': 20, 'gpus': 0, 'memory': 31.60095291212201, 'object_store': 15.800476455129683}
+(orchestrate pid=308034) 12:48:04 INFO - Number of workers - 5 with {'num_cpus': 0.8} each
+(orchestrate pid=308034) 12:48:04 INFO - Completed 0 files in 5.312760670979818e-06 min. Waiting for completion
+(orchestrate pid=308034) 12:48:06 INFO - Completed processing in 0.022701112429300944 min
+12:48:16 INFO - Completed execution in 0.24697633584340414 min, execution result 0
+</code></pre>
+<h4 id="running-as-pure-python-application">Running as pure python application</h4>
+<pre>
+% make venv
+% source venv/bin/activate
+(venv) % cd src
+(venv) % python filter_local_ray.py
+input table has 100 rows
+
+output table has 11 rows
+output metadata : {'total_docs_count': 100, 'total_bytes_count': 478602, 'total_columns_count': 25, "docs_filtered_by 'docq_total_words > 100 AND docq_total_words < 200'": 78, "bytes_filtered_by 'docq_total_words > 100 AND docq_total_words < 200'": 429191, "docs_filtered_by 'docq_perplex_score < 230'": 53, "bytes_filtered_by 'docq_perplex_score < 230'": 275911, 'docs_after_filter': 11, 'bytes_after_filter': 24061, 'columns_after_filter': 23}
+(venv) % deactivate
+% ls ../output
+metadata.json   test1.parquet
+%
+</pre>
+
+<h4 id="passing-parameters-through-command-line-interface">Passing parameters through command-line-interface</h4>
+<p>When running filtering on a local terminal, double quotes need to be escaped accordingly. For example, to find documents that are written in Java or Python programming languages, a SQL query using the <code>IN</code> keyword is needed in the <code>filter_criteria_list</code> argument. The example below shows how to properly pass this argument to the filter app:</p>
+<pre><code>python filter_transform_ray.py --filter_criteria_list &quot;[\&quot;language IN ('Java', 'Python')\&quot;]&quot; ...
+</code></pre>
+<p>When filter runs from the command line, it needs to include the entire <code>filter_criteria_list</code> parameter within double quotes (<code>"</code>), so that the command line parser can determine where the parameter begins and ends. This, however, will conflict with the internal double quotes that are used to specify the conditions inside the list (<code>language IN ('Java', 'Python')</code>). To resolve this problem, the internal double quotes need to be escaped, as in the \"language IN ('Java', 'Python')\" notation.</p>
+<h3 id="filter-statistics">Filter Statistics</h3>
+<p>As shown in the output of the local run of filtering, the metadata contains several statistics:
+* Global statistics:<br />
+  * <code>total_docs_count</code>, <code>total_bytes_count</code>, <code>total_columns_count</code>: total number of documents (rows), bytes, and columns that were present in the input table, before filtering took place<br />
+  * <code>docs_after_filter</code>, <code>bytes_after_filter</code>, <code>columns_after_filter</code>: total number of documents (rows), bytes, and columns that were present in the output table, after filtering took place<br />
+* Per-criteria statistics: these statistics show the impact of each filtering criteria - number of documents and bytes that it filters out, when applied by itself. We ran the local filter with two filtering criteria, and these are the stats for each of them:<br />
+  * <code>docs_filtered_by 'docq_total_words &gt; 100 AND docq_total_words &lt; 200'</code>, <code>bytes_filtered_by 'docq_total_words &gt; 100 AND docq_total_words &lt; 200'</code> - the number of documents and bytes filtered out by the <code>docq_total_words &gt; 100 AND docq_total_words &lt; 200</code> filtering condition<br />
+  * <code>docs_filtered_by 'docq_perplex_score &lt; 230'</code>, <code>bytes_filtered_by 'docq_perplex_score &lt; 230'</code>  - the number of documents and bytes filtered out by the <code>docq_perplex_score &lt; 230</code> filtering condition  </p>
+<h2 id="running_1">Running</h2>
+<h3 id="launched-command-line-options">Launched Command Line Options</h3>
+<p>The following command line arguments are available in addition to 
+the options provided by 
+the <a href="../../../../data-processing-lib/doc/python-launcher-options/">python launcher</a>.</p>
+<pre><code>  --filter_criteria_list FILTER_CRITERIA_LIST
+                        list of filter criteria (in SQL WHERE clause format), for example: [
+                          &quot;docq_total_words &gt; 100 AND docq_total_words &lt; 200&quot;,
+                          &quot;docq_perplex_score &lt; 230&quot;,
+                          &quot;date_acquired BETWEEN '2023-07-04' AND '2023-07-08'&quot;,
+                          &quot;title LIKE 'https://%'&quot;,
+                          &quot;document_id IN ('doc-id-1', 'doc-id-2', 'doc-id-3')&quot;
+                        ]
+  --filter_columns_to_drop FILTER_COLUMNS_TO_DROP
+                        list of columns to drop after filtering, for example: [&quot;column1&quot;, &quot;column2&quot;]
+  --filter_logical_operator {AND,OR}
+                        logical operator (AND or OR) that joins filter criteria
+
+</code></pre>
+<h3 id="running-the-samples">Running the samples</h3>
+<p>To run the samples, use the following <code>make</code> targets</p>
+<ul>
+<li><code>run-cli-sample</code> - runs src/filter_transform_ray.py using command line args</li>
+<li><code>run-local-python-only-sample</code> - runs src/filter_local.py</li>
+<li><code>run-local-sample</code> - runs src/filter_local_ray.py</li>
+<li><code>run-s3-sample</code> - runs src/filter_s3_ray.py<ul>
+<li>Requires prior installation of minio, depending on your platform (e.g., from <a href="https://min.io/docs/minio/macos/index.html">here</a>
+ and <a href="https://min.io/docs/minio/linux/index.html">here</a> 
+ and invocation of <code>make minio-start</code> to load data into local minio for S3 access.</li>
+</ul>
+</li>
+</ul>
+<p>These targets will activate the virtual environment and set up any configuration needed.
+Use the <code>-n</code> option of <code>make</code> to see the detail of what is done to run the sample.</p>
+<p>For example, </p>
+<pre><code class="language-shell">make run-cli-sample
+...
+</code></pre>
+<p>Then </p>
+<pre><code class="language-shell">ls output
+</code></pre>
+<p>To see results of the transform.</p>
+<h3 id="transforming-data-using-the-transform-image">Transforming data using the transform image</h3>
+<p>To use the transform image to transform your data, please refer to the 
+<a href="../../../../doc/quick-start/run-transform-image/">running images quickstart</a>,
+substituting the name of this transform image and runtime as appropriate.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs"], "search": "../../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.af256bd8.min.js"></script>
+      
+        <script src="../../../../assets/javascripts/badge.js" async></script>
+      
+    
+  </body>
+</html>
